@@ -12,6 +12,10 @@ The files have started to be added with a naming convention which contains the d
 
 This project is designed to provide a library which will when exercised grab the latest file from this branch.
 
+## Version 1
+
+Run the library from the command line with `lein run` or build an uberjar and run without arguments. You will notice the branch downloaded to a zip file called `adstxt-results.zip` and it's latest file extracted. At the time of this writing the file was `adstxt_domains_2017-10-23.txt'. This will change depending on when you run your version.
+
 
 ## License
 

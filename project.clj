@@ -17,7 +17,9 @@
                  [ring-webjars "0.2.0"]
                  [metosin/ring-http-response "0.9.0"]
                  [selmer "1.11.1"]]
-  
+
+  :min-lein-version "2.0.0"
+
   :plugins [[lein-ring "0.9.7"]
             [environ/environ.lein "0.3.1"]]
   

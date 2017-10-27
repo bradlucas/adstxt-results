@@ -27,3 +27,9 @@
     (.close in)
     (.close out)
     (.disconnect con)))
+
+
+(defn download-if-needed [filename]
+  (if (not (.exists (clojure.java.io/as-file filename)))
+    (save-branch-to-zip filename url))
+  filename)

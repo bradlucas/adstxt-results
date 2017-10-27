@@ -4,6 +4,7 @@
             [compojure.route :as route]
             [adstxt-results.layout :refer [error-page]]
             [adstxt-results.zip :as zip]
+            [adstxt-results.repo :as repo]
             [clojure.java.io :as io]
             [clojure.data.json :as json]
             [ring.middleware.defaults :refer [wrap-defaults site-defaults]]
@@ -30,7 +31,7 @@
   ;; return the latest domains as a list 
 
   ;; Assume we've downloaded the zip already to 'adstxt-results.zip'
-  (let [localzip "adstxt-results.zip"
+  (let [localzip (repo/download-if-needed "adstxt-results.zip")
         recentfile (zip/extract-most-recent-file localzip)]
     (println "Most recent file " recentfile "has been downloaded")
     {:Status 200
@@ -50,7 +51,7 @@
 
 (defn domains-file []
   ;; return the actual file
-  (let [localzip "adstxt-results.zip"
+  (let [localzip (repo/download-if-needed "adstxt-results.zip")
         recentfile (zip/extract-most-recent-file localzip)]
     {:status 200
      :headers {"content-disposition" (format "attachment; filename=\"%s\"" recentfile)} 
@@ -59,7 +60,7 @@
 
 (defn domains-json []
   ;; package the domains file in json with the date, number of records and domains in a list
-  (let [localzip "adstxt-results.zip"
+  (let [localzip (repo/download-if-needed "adstxt-results.zip")
         recentfile (zip/extract-most-recent-file localzip)]
     {:status 200
      :headers {"Content-Type" "application/json"} 

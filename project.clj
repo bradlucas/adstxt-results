@@ -20,16 +20,19 @@
   
   :plugins [[lein-ring "0.9.7"]
             [environ/environ.lein "0.3.1"]]
+  
   :hooks [environ.leiningen.hooks]
   :ring {:handler adstxt-results.handler/app}
 
   :target-path "target/%s/"
-  :uberjar-name "adstxt-results-standalone.jar"
+  :main ^:skip-aot adstxt-results.core
+  
 
   :profiles
-  {:production {:env {:production true}}
+  {:uberjar {:omit-source true
+             :aot :all
+             :uberjar-name "adstxt-results-standalone.jar"}
+   :production {:env {:production true}}
    :dev {:dependencies [[javax.servlet/servlet-api "2.5"]
-                        [ring/ring-mock "0.3.0"]]}}
+                        [ring/ring-mock "0.3.0"]]}})
 
-  :main adstxt-results.core
-  )

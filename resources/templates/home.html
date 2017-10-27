@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container text-centered">
+  <div class="row">
+    <div class="jumbotron col-md-12">
+      <h1>Adstxt-Results</h1>
+    </div>
+  </div>
+
+
+  <div class="row spacer">
+    <div class="col-md-12">
+      <h2>Links</h2>
+      
+      <ul>
+        <li>
+          <a href="{{servlet-context}}/api/list">
+            Domains (Text List)
+          </a>
+        </li>
+        <li>
+          <a href="{{servlet-context}}/api/file">
+            Domains (File)
+          </a>
+        </li>
+        <li>
+          <a href="{{servlet-context}}/api/json">
+            Domains (Json)
+          </a>
+        </li>
+    </div>
+  </div>
+
+  
+  <div class="row spacer">
+    <div class="col-md-12">
+      <h3>Details</h3>
+      
+      TODO
+    </div>
+  </div>
+
+  
+  
+</div>
+  
+{% endblock %}

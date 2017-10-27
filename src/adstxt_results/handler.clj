@@ -1,14 +1,23 @@
 (ns adstxt-results.handler
-  (:require [compojure.core :refer :all]
+  (:require [adstxt-results.layout :as layout]
+            [compojure.core :refer :all]
             [compojure.route :as route]
+            [adstxt-results.layout :refer [error-page]]
             [adstxt-results.zip :as zip]
             [clojure.java.io :as io]
             [clojure.data.json :as json]
-            [ring.middleware.defaults :refer [wrap-defaults site-defaults]]))
+            [ring.middleware.defaults :refer [wrap-defaults site-defaults]]
+            [ring.middleware.webjars :refer [wrap-webjars]])
+  (:import [javax.servlet ServletContext])
+  )
 
 (defn home-page []
+  (layout/render
+   "home.html"))
 
-  )
+(defn about-page []
+  (layout/render
+   "about.html"))
 
 ;; Dupliucate function. See @core.clj
 (defn file-data
@@ -60,10 +69,12 @@
 
 (defroutes app-routes
   (GET "/" [] (home-page))
+  (GET "/about" [] (about-page))
   (GET "/api/list" [] (domains-list))
   (GET "/api/file" [] (domains-file))
   (GET "/api/json" [] (domains-json))
   (route/not-found "<h1>Page not found</h1>"))
 
+
 (def app
-  (wrap-defaults app-routes site-defaults))
+  (wrap-webjars (wrap-defaults app-routes site-defaults)))

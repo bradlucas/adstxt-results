@@ -22,6 +22,8 @@
             [environ/environ.lein "0.3.1"]]
   :hooks [environ.leiningen.hooks]
   :ring {:handler adstxt-results.handler/app}
+
+  :target-path "target/%s/"
   :uberjar-name "adstxt-results-standalone.jar"
 
   :profiles

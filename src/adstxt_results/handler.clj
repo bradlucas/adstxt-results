@@ -49,6 +49,16 @@
        :domains (doall domains)}
       )))
 
+(defn file-info
+  [filename]
+  (with-open [rdr (io/reader filename)]
+    (let [[[l1 _ l3 _] _] (split-at 4 (line-seq rdr))
+          num-domains (Integer/parseInt (second (clojure.string/split l3 #": ")))]
+      {:name l1
+       :num-domains num-domains}
+      ))
+  )
+
 (defn domains-file []
   ;; return the actual file
   (let [localzip (repo/download-if-needed "adstxt-results.zip")
@@ -67,6 +77,15 @@
      :body (json/write-str (file-map recentfile))
      }))
 
+(defn domains-info []
+  ;; return just the file date and the number of domains available
+  (let [localzip (repo/download-if-needed "adstxt-results.zip")
+        recentfile (zip/extract-most-recent-file localzip)]
+    {:status 200
+     :headers {"Content-Type" "application/json"} 
+     :body (json/write-str (file-info recentfile))
+     }))
+  
 
 (defroutes app-routes
   (GET "/" [] (home-page))
@@ -74,6 +93,7 @@
   (GET "/api/list" [] (domains-list))
   (GET "/api/file" [] (domains-file))
   (GET "/api/json" [] (domains-json))
+  (GET "/api/info" [] (domains-info))
   (route/not-found "<h1>Page not found</h1>"))
 
 

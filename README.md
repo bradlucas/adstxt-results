@@ -23,7 +23,7 @@ There are four routes. The first returns the list of domains as a simple text li
 
 ## Example Site
 
-A version of this project is running at [http://ads-txt.herokuapp.com/](http://ads-txt.herokuapp.com/).
+A version of this project is running at [https://adstxt-results.herokuapp.com/](https://adstxt-results.herokuapp.com/).
 
 
 

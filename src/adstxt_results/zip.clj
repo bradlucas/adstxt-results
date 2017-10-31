@@ -1,6 +1,5 @@
 (ns adstxt-results.zip
-  (:require [clojure.java.io :as io]
-            [adstxt-results.repo :as repo])
+  (:require [clojure.java.io :as io])
   (:import java.util.zip.ZipInputStream))
 
 
@@ -68,3 +67,25 @@
 (defn extract-most-recent-file [zipfile]
   (let [recentfile (get-most-recent-filename zipfile)]
     (extract-file-from-zip zipfile recentfile)))
+
+
+;; NEW TEMP
+(defn extract-most-recent-file-to-temp
+  "For a given zip file extract the most recent filename. Return the filename and the file as a java.io.File"
+  [file]
+  (let [recent-filename (get-most-recent-filename (.getAbsolutePath file))
+        shortname (last (clojure.string/split recent-filename #"/"))
+        recent-file (java.io.File/createTempFile "adstxt-results-recent-" ".txt")]
+    (let [zs (ZipInputStream. (io/input-stream file))]
+      (let [entry (first (filter #(= (.getName %) recent-filename) (entries zs)))]
+        (with-open [out-file (io/output-stream (.getAbsolutePath recent-file))]
+          (let [buff-size 4096
+                buffer (byte-array buff-size)]
+            (loop [len (.read zs buffer)]
+              (when (> len 0)
+                (.write out-file buffer 0 len)
+                (recur (.read zs buffer))))))))
+    [shortname recent-file]))
+
+
+  

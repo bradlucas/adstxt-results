@@ -1,7 +1,12 @@
 (ns adstxt-results.core
   (:require [clojure.java.io :as io]
             [adstxt-results.repo :as repo]
-            [adstxt-results.zip :as zip])
+            [adstxt-results.zip :as zip]
+            [compojure.handler :refer [site]]
+            [adstxt-results.handler :as h]
+            [ring.adapter.jetty :as jetty]
+            [environ.core :refer [env]]
+            )
   (:gen-class))
 
 (defn file-data
@@ -19,12 +24,13 @@
   ;; =========================
   (with-open [rdr (io/reader filename)]
     (let [[line1 _ line3] (take 3 (line-seq rdr))
-          num (Integer/parseInt (second (clojure.string/split "Total number of domains: 16516" #": ")))
-          ]
+          num (Integer/parseInt (second (clojure.string/split line3 #": ")))]
       (println line1)
       (println num)
       )))
 
+
+      
 
 (defn run []
   (let [localzip "adstxt-results.zip"]
@@ -33,7 +39,12 @@
       (println "Most recent file " recentfile "has been downloaded"))))
 
 
-(defn -main [& args]
-  (run))
+(defn -main [& [port]]
+  (let [port (Integer. (or port (env :port) 5000))]
+    (jetty/run-jetty (site #'h/app) {:port port :join? false})))
+
+;; For interactive development:
+;; (.stop server)
+;; (def server (-main))
   
  

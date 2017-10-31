@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container text-centered">
+  <div class="row">
+    <div class="jumbotron col-md-12">
+      <h1>Adstxt-Results</h1>
+    </div>
+  </div>
+
+  <div class="row spacer">
+    <div class="col-md-12">
+      <h3>Details</h3>
+      <p>Per Bjorke, Product Manager for Ad Traffic Quality at Google, puts out a list of domains which according to Google has found to host Ads.txt files. He does this by adding a new file each week to a branch of the IAB's adstxtcrawler GitHub repo at the following branch.</p>
+
+      <a target="_default" href="https://github.com/InteractiveAdvertisingBureau/adstxtcrawler/tree/adstxt-results">https://github.com/InteractiveAdvertisingBureau/adstxtcrawler/tree/adstxt-results<a></p>
+
+      
+      <p>The files are added with a naming convention which contains the date of the file. This site is the web interface to a library which was designed to look in the `adstxt-results` branch of the repo and extract the most recent file. Also, links a above let you gatyher the data from the file (as a text list or json) or as the original file.</p>
+      <p>There are four routes. The first returns the list of domains as a simple text list. The second is a route to the original file. The third returns the data from the file in JSON format. The last returns in JSON the name of the file and the number of domains. This last route is useful for application which may want to track the data and only ask for an update if one is available.</p>
+    </div>
+  </div>
+  
+  <div class="row spacer">
+    <div class="col-md-12">
+      <h4>API</h4>
+      <pre>
+        <a href="{{servlet-context}}/api/list">GET /api/list</a>
+
+        <a href="{{servlet-context}}/api/file">GET /api/file</a>
+        
+        <a href="{{servlet-context}}/api/json">GET /api/json</a>
+
+        <a href="{{servlet-context}}/api/info">GET /api/info</a>
+
+      </pre>
+    </div>
+  </div>
+
+  
+  
+</div>
+  
+{% endblock %}

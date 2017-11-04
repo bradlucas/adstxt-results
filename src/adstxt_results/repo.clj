@@ -1,4 +1,5 @@
-(ns adstxt-results.repo)
+(ns adstxt-results.repo
+  (:require [adstxt-results.zip :as zip]))
 
 ;; url
 ;; https://developer.github.com/v3/repos/contents/#get-archive-link
@@ -27,3 +28,25 @@
     (.close in)
     (.close out)
     (.disconnect con)))
+
+
+(defn download-if-needed [filename]
+  (if (not (.exists (clojure.java.io/as-file filename)))
+    (save-branch-to-zip filename url))
+  filename)
+
+
+;; NEW TEMP
+(defn download-to-temp
+  "Download the repo as a zip to a tmp file. Return the java.io.File instance to use and then delete"
+  []
+  (let [file (java.io.File/createTempFile "adstxt-results" ".zip")
+        filename (.getAbsolutePath file)]
+    (save-branch-to-zip filename url)
+    file))
+        
+
+(defn download-most-recent []
+  (let [zip (download-to-temp)
+        [shortname recentfile] (zip/extract-most-recent-file-to-temp zip)]
+    [shortname recentfile zip]))

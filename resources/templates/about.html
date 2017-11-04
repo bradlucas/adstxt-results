@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container text-centered">
+
+  <div class="row">
+    <div class="jumbotron col-md-12">
+      <h1>About</h1>
+    </div>
+  </div>
+
+
+  <div class="row">
+    <p>This project was developed by <a target="_default" href="http://bradlucas.com/index.html">Brad Lucas</a>. It is part of a larger effort to build a system to manage the results from crawling domains for Ads.txt files. This site in particular was built to host a small system which gathers the output of a Google Ads.txt crawler which returns domains which have Ads.txt files. The results are stored in a branch in a GitHub repository in files named by date. Retrieving these files programmatically was the initial reason in building the underlying library of this site.</p>
+
+    <p>The source code for this project are available in GitHub at the listed link below.</p>
+    </p>
+  </div>
+  
+  <div class="row">
+    <h5>Links</h5>
+    <ul>
+      <li>This project's repository - <a target="default" href="https://github.com/bradlucas/adstxt-results">https://github.com/bradlucas/adstxt-results</a></li>
+      <li>Email - <a href="mailto:brad@bbeaconhill.com">brad@beaconhill.com</a></li>
+    </ul>
+  </div>  
+  
+  <div class="row">
+    <div class="col-12 text-center">
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-12 mx-auto text-center" style="text-align: center; margin-top: 40px;">
+      <a target="_default" href="http://clojure.org"><img src="{{servlet-context}}/img/warning_clojure.png"></img></a>
+    </div>
+  </div>
+  
+</div>
+
+{% endblock %}

@@ -1,20 +1,32 @@
 # adstxt-results
 
-A library to pull down the latest file from https://github.com/InteractiveAdvertisingBureau/adstxtcrawler/tree/adstxt-results
+A library to pull down the latest file from [https://github.com/InteractiveAdvertisingBureau/adstxtcrawler/tree/adstxt-results](https://github.com/InteractiveAdvertisingBureau/adstxtcrawler/tree/adstxt-results).
 
 ## Background
 
-Per Bjorke, Product Manager for Ad Traffic Quality at Google, puts out a list of domains which according to Google host Ads.txt files.
+Per Bjorke, Product Manager for Ad Traffic Quality at Google, puts out a list of domains which according to Google host Ads.txt files. He does this by adding a new file each week to a branch of the IAB's adstxtcrawler GitHub repo at the following branch.
 
-He does this by adding a new file each week to a branch of the IAB's adstxtcrawler GitHub repo at https://github.com/InteractiveAdvertisingBureau/adstxtcrawler/tree/adstxt-results.
+[https://github.com/InteractiveAdvertisingBureau/adstxtcrawler/tree/adstxt-results](https://github.com/InteractiveAdvertisingBureau/adstxtcrawler/tree/adstxt-results)
 
-The files have started to be added with a naming convention which contains the date of the file.
+The files are added with a naming convention which contains the date of the file. This site is the web interface to a library which was designed to look in the `adstxt-results` branch of the repo and extract the most recent file. Also, links a above let you gatyher the data from the file (as a text list or json) or as the original file.
 
-This project is designed to provide a library which will when exercised grab the latest file from this branch.
+There are four routes. The first returns the list of domains as a simple text list. The second is a route to the original file. The third returns the data from the file in JSON format. The last returns in JSON the name of the file and the number of domains. This last route is useful for application which may want to track the data and only ask for an update if one is available.
 
-## Version 1
+## API
+    
+### GET /api/list
 
-Run the library from the command line with `lein run` or build an uberjar and run without arguments. You will notice the branch downloaded to a zip file called `adstxt-results.zip` and it's latest file extracted. At the time of this writing the file was `adstxt_domains_2017-10-23.txt'. This will change depending on when you run your version.
+### GET /api/file
+       
+### GET /api/json
+
+### GET /api/info
+
+
+## Example Site
+
+A version of this project is running at [https://adstxt-results.herokuapp.com/](https://adstxt-results.herokuapp.com/).
+
 
 
 ## License

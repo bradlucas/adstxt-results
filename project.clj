@@ -1,4 +1,4 @@
-(defproject adstxt-results "0.0.1"
+(defproject adstxt-results "0.0.2"
   
   :description "https://github.com/bradlucas/adstxt-results"
   :url "https://github.com/bradlucas/adstxt-results"
